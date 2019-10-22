@@ -116,7 +116,7 @@ spec:
         description: the ibmcloud api key
       - name: api
         description: the ibmcloud api endpoint
-        default: "https://cloud.ibm.com"
+        default: "https://dev.console.test.cloud.ibm.com"
       - name: registryRegion
         description: the ibmcloud registry region           
   steps:
@@ -176,7 +176,7 @@ spec:
         description: the ibmcloud api key
       - name: api
         description: the ibmcloud api endpoint
-        default: "https://cloud.ibm.com"
+        default: "https://dev.console.test.cloud.ibm.com"
       - name: deployment-file
         default: deployment.yml
       - name: clusterNamespace
