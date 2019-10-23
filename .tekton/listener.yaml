@@ -8,6 +8,8 @@ spec:
       description: The git repo
     - name: apikey
       description: the ibmcloud api key
+    - name: api
+      description: the ibmcloud api
     - name: registryNamespace
       description: the ibmcloud registry namespace
     - name: registryRegion
@@ -36,6 +38,8 @@ spec:
           value: $(params.repository)
         - name: apikey
           value: $(params.apikey)
+        - name: api
+          value: $(params.api)
         - name: registryNamespace
           value: $(params.registryNamespace)
         - name: registryRegion
