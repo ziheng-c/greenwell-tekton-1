@@ -57,9 +57,9 @@ spec:
         - set -e -o pipefail;
           echo "HELLO BRIAN";
           echo $API;
-          echo $ipnuts.params.api;
+          echo $inputs.params.api;
           echo $IBMCLOUD_API_KEY;
-          echo $ipnuts.params.apikey;
+          echo $inputs.params.apikey;
           ibmcloud login -a $API -r $REGION;
           export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh";
           source pre-build-check.sh;
