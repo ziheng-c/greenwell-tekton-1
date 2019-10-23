@@ -43,6 +43,8 @@ spec:
           value: $(inputs.params.apikey)
         - name: API
           value: "test.cloud.ibm.com"
+        - name: DUMMYPROP
+          value: $(inputs.params.api)
         - name: REGION
           value: $(inputs.params.registryRegion)
         - name: HOME
@@ -57,8 +59,10 @@ spec:
           echo "HELLO BRIAN";
           echo $API;
           echo $inputs.params.api;
+          echo $params.api;
+          echo $DUMMYPROP
           echo $IBMCLOUD_API_KEY;
-          echo $inputs.params.apikey;
+          echo $params.apikey;
           ibmcloud login -a $API -r $REGION;
           export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh";
           source pre-build-check.sh;
@@ -206,7 +210,7 @@ spec:
         - name: IBMCLOUD_API_KEY
           value: $(inputs.params.apikey)
         - name: API
-          value: $(inputs.params.api)
+          value: "test.cloud.ibm.com"
         - name: REGION
           value: $(inputs.params.clusterRegion)
         - name: HOME
@@ -234,7 +238,7 @@ spec:
         - name: IBMCLOUD_API_KEY
           value: $(inputs.params.apikey)
         - name: API
-          value: $(inputs.params.api)
+          value: "test.cloud.ibm.com"
         - name: REGION
           value: $(inputs.params.clusterRegion)
         - name: HOME
