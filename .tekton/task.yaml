@@ -16,7 +16,6 @@ spec:
         description: the ibmcloud api key
       - name: api
         description: the ibmcloud api endpoint
-        default: "https://test.cloud.ibm.com"
       - name: registryNamespace
         description: the ibmcloud registry namespace
       - name: imageName
@@ -43,7 +42,7 @@ spec:
         - name: IBMCLOUD_API_KEY
           value: $(inputs.params.apikey)
         - name: API
-          value: $(inputs.params.api)
+          value: "test.cloud.ibm.com"
         - name: REGION
           value: $(inputs.params.registryRegion)
         - name: HOME
@@ -72,7 +71,7 @@ spec:
         - name: IBMCLOUD_API_KEY
           value: $(inputs.params.apikey)
         - name: API
-          value: $(inputs.params.api)
+          value: "test.cloud.ibm.com"
         - name: REGION
           value: $(inputs.params.registryRegion)
         - name: HOME
@@ -121,7 +120,6 @@ spec:
         description: the ibmcloud api key
       - name: api
         description: the ibmcloud api endpoint
-        default: "https://test.cloud.ibm.com"
       - name: registryRegion
         description: the ibmcloud registry region           
   steps:
@@ -143,7 +141,7 @@ spec:
         - name: IBMCLOUD_API_KEY
           value: $(inputs.params.apikey)
         - name: API
-          value: $(inputs.params.api)
+          value: "test.cloud.ibm.com"
         - name: HOME
           value: "/root"
         - name: REGION
@@ -181,7 +179,6 @@ spec:
         description: the ibmcloud api key
       - name: api
         description: the ibmcloud api endpoint
-        default: "https://test.cloud.ibm.com"
       - name: deployment-file
         default: deployment.yml
       - name: clusterNamespace
