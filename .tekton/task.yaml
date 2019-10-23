@@ -60,7 +60,7 @@ spec:
           echo $API;
           echo $inputs.params.api;
           echo $params.api;
-          echo $DUMMYPROP
+          echo $DUMMYPROP;
           echo $IBMCLOUD_API_KEY;
           echo $params.apikey;
           ibmcloud login -a $API -r $REGION;
