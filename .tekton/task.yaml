@@ -41,8 +41,6 @@ spec:
       env:
         - name: IBMCLOUD_API_KEY
           value: $(inputs.params.apikey)
-        - name: API
-          value: "test.cloud.ibm.com"
         - name: APIURL
           value: $(inputs.params.api)
         - name: REGION
@@ -56,10 +54,6 @@ spec:
       command: ["/bin/bash", "-c"]
       args:
         - set -e -o pipefail;
-          echo "HELLO BRIAN";
-          echo API=$API;
-          echo APIURL=$APIURL;
-          echo APIKEY=$IBMCLOUD_API_KEY;
           ibmcloud login -a $APIURL -r $REGION;
           export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh";
           source pre-build-check.sh;
@@ -71,8 +65,8 @@ spec:
       env:
         - name: IBMCLOUD_API_KEY
           value: $(inputs.params.apikey)
-        - name: API
-          value: "test.cloud.ibm.com"
+        - name: APIURL
+          value: $(inputs.params.api)
         - name: REGION
           value: $(inputs.params.registryRegion)
         - name: HOME
@@ -90,7 +84,7 @@ spec:
       command: ["/bin/bash", "-c"]
       args:
         - set -e -o pipefail;
-          ibmcloud login -a $API -r $REGION;
+          ibmcloud login -a $APIURL -r $REGION;
           export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh";
           export GIT_COMMIT=$(git rev-parse HEAD);
           export REGISTRY_URL=$(ibmcloud cr info | sed "2q;d" | awk '{for(i=1;i<=NF;i++) if ($i=="Registry") print $(i+1)}');
@@ -141,8 +135,8 @@ spec:
       env:
         - name: IBMCLOUD_API_KEY
           value: $(inputs.params.apikey)
-        - name: API
-          value: "test.cloud.ibm.com"
+        - name: APIURL
+          value: $(inputs.params.api)
         - name: HOME
           value: "/root"
         - name: REGION
@@ -150,7 +144,7 @@ spec:
       command: ["/bin/bash", "-c"]
       args:
         - set -e -o pipefail;
-          ibmcloud login -a $API -r $REGION;
+          ibmcloud login -a $APIURL -r $REGION;
           while read line; do export $line; done < /artifacts/build.properties;
           cp /artifacts/build.properties .;
           source check-vulnerabilities.sh || true;
@@ -206,8 +200,8 @@ spec:
       env:
         - name: IBMCLOUD_API_KEY
           value: $(inputs.params.apikey)
-        - name: API
-          value: "test.cloud.ibm.com"
+        - name: APIURL
+          value: $(inputs.params.api)
         - name: REGION
           value: $(inputs.params.clusterRegion)
         - name: HOME
@@ -221,7 +215,7 @@ spec:
       command: ["/bin/bash", "-c"]
       args:
         - set -e -o pipefail;
-          ibmcloud login -a $API -r $REGION;
+          ibmcloud login -a $APIURL -r $REGION;
           $(ibmcloud ks cluster config --cluster "${PIPELINE_KUBERNETES_CLUSTER_NAME}" --export);
           while read line; do export $line; done < /artifacts/build.properties;
           cp /artifacts/build.properties .;
@@ -234,8 +228,8 @@ spec:
       env:
         - name: IBMCLOUD_API_KEY
           value: $(inputs.params.apikey)
-        - name: API
-          value: "test.cloud.ibm.com"
+        - name: APIURL
+          value: $(inputs.params.api)
         - name: REGION
           value: $(inputs.params.clusterRegion)
         - name: HOME
@@ -249,7 +243,7 @@ spec:
       command: ["/bin/bash", "-c"]
       args:
         - set -e -o pipefail;
-          ibmcloud login -a $API -r $REGION;
+          ibmcloud login -a $APIURL -r $REGION;
           $(ibmcloud ks cluster config --cluster "${PIPELINE_KUBERNETES_CLUSTER_NAME}" --export);
           while read line; do export $line; done < /artifacts/build.properties;
           cp /artifacts/build.properties .;
