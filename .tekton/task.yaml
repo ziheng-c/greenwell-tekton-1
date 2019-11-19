@@ -9,12 +9,20 @@ spec:
       command: ["bash", "-c"]
       args:
         - echo 'Task 1 - Step 1 Changed';
-          apt-get -y install iputils-ping;
+          apt-get update; apt-get -y install iputils-ping;
           ping -c 5 -W 5 greenwell-app.eu-de.mybluemix.net;
     - name: task-one-step-two
       image: ubuntu
       command: ["bash", "-c"]
       args:
         - echo 'Task 1 - Step 2 Changed';
-          apt-get -y install curl;
-          curl https://greenwell-app.eu-de.mybluemix.net/health;
+          apt-get update; apt-get -y install curl;
+          alive=$(curl https://greenwell-app.eu-de.mybluemix.net/health);
+          if [ $alive == "200 - Healthy" ]
+          then
+          echo "TEST PASS"
+          return 1;
+          else
+          echo "TEST FAIL"
+          return 0;
+          fi
