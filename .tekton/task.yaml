@@ -18,11 +18,7 @@ spec:
         - echo 'Task 1 - Step 2 Changed';
           apt-get update; apt-get -y install curl;
           alive=$(curl https://greenwell-app.eu-de.mybluemix.net/health);
-          if [ $alive == "200 - Healthy" ]
-          then
-          echo "TEST PASS";
-          return 1;
-          else
-          echo "TEST FAIL";
-          return 0;
+          if [ "$alive" == "200 - Healthy" ];
+          then echo "TEST PASS"; return 1;
+          else echo "TEST FAIL"; return 0;
           fi
