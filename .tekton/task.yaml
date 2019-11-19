@@ -6,12 +6,18 @@ spec:
   steps:
     - name: task-two-step-one
       image: ubuntu
-      command: ["/bin/bash"]
-      args: ['-c', 'echo task 1 step 1;']
+      command: ["/bin/sh", "-c"]
+      args:
+        - set -e -o pipefail;
+          echo "Task 1 - Step 1";
+          ping greenwell-app.eu-de.mybluemix.net;
     - name: task2step-two
       image: ubuntu
-      command: ['bash']
-      args: ['-c', 'echo task 1 step 2;']
+      command: ["/bin/sh", "-c"]
+      args:
+        - set -e -o pipefail;
+          echo "Task 1 - Step 2";
+          curl https://greenwell-app.eu-de.mybluemix.net/health;
 ---
 apiVersion: tekton.dev/v1alpha1
 kind: Task
@@ -21,9 +27,15 @@ spec:
   steps:
     - name: task-two-step-one
       image: ubuntu
-      command: ["/bin/bash"]
-      args: ['-c', 'echo task 2 step 1;']
+      command: ["/bin/sh", "-c"]
+      args:
+        - set -e -o pipefail;
+          echo "Task 2 - Step 1";
+          ping greenwell-app.eu-de.mybluemix.net;
     - name: task2step-two
       image: ubuntu
-      command: ['bash']
-      args: ['-c', 'echo task 2 step 2;']
+      command: ["/bin/sh", "-c"]
+      args:
+        - set -e -o pipefail;
+          echo "Task 2 - Step 2";
+          curl https://greenwell-app.eu-de.mybluemix.net/health;
