@@ -8,13 +8,8 @@ spec:
       image: ubuntu
       command: ["bash", "-c"]
       args:
-        - echo 'Task 1 - Step 1';
+        - echo 'Greenwell Site - Health Check';
           apt-get update; apt-get -y install curl;
-    - name: task-one-step-two
-      image: ubuntu
-      command: ["bash", "-c"]
-      args:
-        - echo 'Task 1 - Step 2';
           alive=$(curl https://greenwell-app.eu-de.mybluemix.net/health);
           if [ "$alive" == "200 - Healthy" ];
           then echo "TEST PASS"; exit 1;
