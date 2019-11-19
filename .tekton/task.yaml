@@ -8,17 +8,15 @@ spec:
       image: ubuntu
       command: ["bash", "-c"]
       args:
-        - echo 'Task 1 - Step 1 Changed';
-          apt-get update; apt-get -y install iputils-ping;
-          ping -c 5 -W 5 greenwell-app.eu-de.mybluemix.net;
+        - echo 'Task 1 - Step 1';
+          apt-get update; apt-get -y install curl;
     - name: task-one-step-two
       image: ubuntu
       command: ["bash", "-c"]
       args:
-        - echo 'Task 1 - Step 2 Changed';
-          apt-get update; apt-get -y install curl;
+        - echo 'Task 1 - Step 2';
           alive=$(curl https://greenwell-app.eu-de.mybluemix.net/health);
           if [ "$alive" == "200 - Healthy" ];
-          then echo "TEST PASS"; exit 0;
+          then echo "TEST PASS"; exit 1;
           else echo "TEST FAIL"; exit 1;
           fi
