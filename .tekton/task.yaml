@@ -4,14 +4,14 @@ metadata:
   name: task1
 spec:
   steps:
-    - name: task-two-step-one
+    - name: task-one-step-one
       image: ubuntu
       command: ["/bin/sh", "-c"]
       args:
         - set -e -o pipefail;
           echo "Task 1 - Step 1";
           ping greenwell-app.eu-de.mybluemix.net;
-    - name: task2step-two
+    - name: task-one-step-two
       image: ubuntu
       command: ["/bin/sh", "-c"]
       args:
@@ -32,7 +32,7 @@ spec:
         - set -e -o pipefail;
           echo "Task 2 - Step 1";
           ping greenwell-app.eu-de.mybluemix.net;
-    - name: task2step-two
+    - name: task-two-step-two
       image: ubuntu
       command: ["/bin/sh", "-c"]
       args:
