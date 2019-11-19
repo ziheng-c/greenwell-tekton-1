@@ -10,7 +10,7 @@ spec:
       args:
         - echo 'Task 1 - Step 1 Changed';
           apt-get update; apt-get -y install iputils-ping;
-          ping greenwell-app.eu-de.mybluemix.net;
+          ping -n 5 -w 5000 greenwell-app.eu-de.mybluemix.net;
     - name: task-one-step-two
       image: ubuntu
       command: ["/bin/bash", "-c"]
@@ -31,7 +31,7 @@ spec:
       args:
         - echo 'Task 2 - Step 1 Changed';
           apt-get update; apt-get -y install iputils-ping;
-          ping greenwell-app.eu-de.mybluemix.net;
+          ping -n 5 -w 5000 greenwell-app.eu-de.mybluemix.net;
     - name: task-two-step-two
       image: ubuntu
       command: ["bash", "-c"]
