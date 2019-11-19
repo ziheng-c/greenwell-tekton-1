@@ -1,1 +1,1 @@
-Sample application packaged as a container
+Sample tekton pipeline
