@@ -1,64 +1,64 @@
 apiVersion: tekton.dev/v1alpha1
 kind: TriggerTemplate
 metadata:
-  name: template
+  name: pipeline-template
 spec:
   params:
-    - name: repository
-      description: The git repo
-    - name: apikey
-      description: the ibmcloud api key
-    - name: api
-      description: the ibmcloud api
-    - name: registryNamespace
-      description: the ibmcloud registry namespace
-    - name: registryRegion
-      description: the ibmcloud registry region
-      default: us-south
-    - name: cluster
-      description: The IBM Cloud Kubernetes cluster name
-    - name: clusterRegion
-      description: The IBM Cloud Kubernetes cluster region
-      default: us-south
-    - name: clusterNamespace
-      description: The Kubernetes cluster namespace
-      default: prod
+    - name: gitrevision
+      description: The git revision
+      default: master
+    - name: gitrepositoryurl
+      description: The git repository url
+    - name: message
+      description: The message to print
+      default: This is the default message
   resourcetemplates:
+    - apiVersion: tekton.dev/v1alpha1
+      kind: PipelineResource
+      metadata:
+        name: git-source-$(uid)
+        labels:
+          triggertemplated: "true"
+          generatedBy: "triggers-example"
+      spec:
+        type: git
+        params:
+          - name: revision
+            value: $(params.gitrevision)
+          - name: url
+            value: $(params.gitrepositoryurl)
     - apiVersion: tekton.dev/v1alpha1
       kind: PipelineRun
       metadata:
-        name: pipelinerun-$(uid)
+        generateName: sample-pipeline-run
+        labels:
+          triggertemplated: "true"
+          generatedBy: "triggers-example"
       spec:
         pipelineRef:
-            name: pipeline
-        params:
-        - name: pipeline-pvc
-          value: pipelinerun-$(uid)-pvc
-        - name: repository
-          value: $(params.repository)
-        - name: apikey
-          value: $(params.apikey)
-        - name: api
-          value: $(params.api)
-        - name: registryNamespace
-          value: $(params.registryNamespace)
-        - name: registryRegion
-          value: $(params.registryRegion)
-        - name: cluster
-          value: $(params.cluster)
-        - name: clusterRegion
-          value: $(params.clusterRegion)
-        - name: clusterNamespace
-          value: $(params.clusterNamespace)
+          name: sample-pipeline
 ---
 apiVersion: tekton.dev/v1alpha1
 kind: TriggerBinding
 metadata:
-  name: binding
+  name: pipeline-binding
 spec:
   params:
-    - name: repository
-      value: "https://github.com/skaegi/hello-containers"
+    - name: gitrevision
+      value: $(event.head_commit.id)
+    - name: gitrepositoryurl
+      value: $(event.repository.url)
+---
+apiVersion: tekton.dev/v1alpha1
+kind: TriggerBinding
+metadata:
+  name: manual-pipeline-binding
+spec:
+  params:
+    - name: gitrevision
+      value: v0.32.0
+    - name: gitrepositoryurl
+      value: https://github.com/GoogleContainerTools/skaffold
 ---
 apiVersion: tekton.dev/v1alpha1
 kind: EventListener
@@ -67,6 +67,23 @@ metadata:
 spec:
   triggers:
     - binding:
-        name: binding
+        name: pipeline-binding
       template:
-        name: template
+        name: pipeline-template
+      params:
+        - name: message
+          value: Hello from the Git Triggers EventListener!
+---
+apiVersion: tekton.dev/v1alpha1
+kind: EventListener
+metadata:
+  name: manual-listener
+spec:
+  triggers:
+    - binding:
+        name: manual-pipeline-binding
+      template:
+        name: pipeline-template
+      params:
+        - name: message
+          value: Hello from the Manual Triggers EventListener!
