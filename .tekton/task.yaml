@@ -9,9 +9,9 @@ spec:
       command: ["bash", "-c"]
       args:
         - echo 'Greenwell Site - Health Check';
-          apt-get update; apt-get -y install curl;
+          apt-get update > /dev/null; apt-get -y install curl > /dev/null;
           alive=$(curl https://greenwell-app.eu-de.mybluemix.net/health);
           if [ "$alive" == "200 - Healthy" ];
-          then echo "TEST PASS"; exit 1;
+          then echo "TEST PASS"; exit 0;
           else echo "TEST FAIL"; exit 1;
           fi
