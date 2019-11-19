@@ -6,13 +6,13 @@ spec:
   steps:
     - name: task-one-step-one
       image: ubuntu
-      command: ["/bin/sh", "-c"]
+      command: ["bash", "-c"]
       args:
         - echo "Task 1 - Step 1";
           ping greenwell-app.eu-de.mybluemix.net;
     - name: task-one-step-two
       image: ubuntu
-      command: ["/bin/sh", "-c"]
+      command: ["/bin/bash", "-c"]
       args:
         - echo "Task 1 - Step 2";
           curl https://greenwell-app.eu-de.mybluemix.net/health;
@@ -25,13 +25,13 @@ spec:
   steps:
     - name: task-two-step-one
       image: ubuntu
-      command: ["/bin/sh", "-c"]
+      command: ["/bin/bash", "-c"]
       args:
         - echo "Task 2 - Step 1";
           ping greenwell-app.eu-de.mybluemix.net;
     - name: task-two-step-two
       image: ubuntu
-      command: ["/bin/sh", "-c"]
+      command: ["bash", "-c"]
       args:
         - echo "Task 2 - Step 2";
           curl https://greenwell-app.eu-de.mybluemix.net/health;
