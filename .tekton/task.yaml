@@ -20,9 +20,9 @@ spec:
           alive=$(curl https://greenwell-app.eu-de.mybluemix.net/health);
           if [ $alive == "200 - Healthy" ]
           then
-          echo "TEST PASS"
+          echo "TEST PASS";
           return 1;
           else
-          echo "TEST FAIL"
+          echo "TEST FAIL";
           return 0;
           fi
