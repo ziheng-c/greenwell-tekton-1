@@ -8,15 +8,13 @@ spec:
       image: ubuntu
       command: ["/bin/sh", "-c"]
       args:
-        - set -e -o pipefail;
-          echo "Task 1 - Step 1";
+        - echo "Task 1 - Step 1";
           ping greenwell-app.eu-de.mybluemix.net;
     - name: task-one-step-two
       image: ubuntu
       command: ["/bin/sh", "-c"]
       args:
-        - set -e -o pipefail;
-          echo "Task 1 - Step 2";
+        - echo "Task 1 - Step 2";
           curl https://greenwell-app.eu-de.mybluemix.net/health;
 ---
 apiVersion: tekton.dev/v1alpha1
@@ -29,13 +27,11 @@ spec:
       image: ubuntu
       command: ["/bin/sh", "-c"]
       args:
-        - set -e -o pipefail;
-          echo "Task 2 - Step 1";
+        - echo "Task 2 - Step 1";
           ping greenwell-app.eu-de.mybluemix.net;
     - name: task-two-step-two
       image: ubuntu
       command: ["/bin/sh", "-c"]
       args:
-        - set -e -o pipefail;
-          echo "Task 2 - Step 2";
+        - echo "Task 2 - Step 2";
           curl https://greenwell-app.eu-de.mybluemix.net/health;
