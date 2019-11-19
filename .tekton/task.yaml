@@ -5,15 +5,19 @@ metadata:
 spec:
   steps:
     - name: task-one-step-one
-      image: alpine/node
+      image: ubuntu
       command: ["bash", "-c"]
       args:
-        - echo 'Task 1 - Step 1 Changed'; ping greenwell-app.eu-de.mybluemix.net;
+        - echo 'Task 1 - Step 1 Changed';
+        apt-get update; apt-get install ping;
+        ping greenwell-app.eu-de.mybluemix.net;
     - name: task-one-step-two
-      image: alpine/node
+      image: ubuntu
       command: ["/bin/bash", "-c"]
       args:
-        - echo 'Task 1 - Step 2 Changed'; curl https://greenwell-app.eu-de.mybluemix.net/health;
+        - echo 'Task 1 - Step 2 Changed';
+        apt-get update; apt-get install curl;
+        curl https://greenwell-app.eu-de.mybluemix.net/health;
 ---
 apiVersion: tekton.dev/v1alpha1
 kind: Task
@@ -22,12 +26,16 @@ metadata:
 spec:
   steps:
     - name: task-two-step-one
-      image: alpine/node
+      image: ubuntu
       command: ["/bin/bash", "-c"]
       args:
-        - echo 'Task 2 - Step 1 Changed'; ping greenwell-app.eu-de.mybluemix.net;
+        - echo 'Task 2 - Step 1 Changed';
+        apt-get update; apt-get install ping;
+        ping greenwell-app.eu-de.mybluemix.net;
     - name: task-two-step-two
-      image: alpine/node
+      image: ubuntu
       command: ["bash", "-c"]
       args:
-        - echo 'Task 2 - Step 2 Changed'; curl https://greenwell-app.eu-de.mybluemix.net/health;
+        - echo 'Task 2 - Step 2 Changed';
+        apt-get update; apt-get install curl;
+        curl https://greenwell-app.eu-de.mybluemix.net/health;
