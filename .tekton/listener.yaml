@@ -63,7 +63,7 @@ spec:
 apiVersion: tekton.dev/v1alpha1
 kind: EventListener
 metadata:
-  name: listener
+  name: lonely-listener
 spec:
   triggers:
     - binding:
@@ -77,7 +77,7 @@ spec:
 apiVersion: tekton.dev/v1alpha1
 kind: EventListener
 metadata:
-  name: manual-listener
+  name: manual-lonely-listener
 spec:
   triggers:
     - binding:
