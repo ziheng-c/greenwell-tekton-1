@@ -19,4 +19,4 @@ spec:
     - name: enviro-info
       image: ubuntu
       command:
-        - printenv    
+        - printenv
