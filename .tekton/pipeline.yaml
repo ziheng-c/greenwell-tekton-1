@@ -7,3 +7,6 @@ spec:
     - name: task1
       taskRef:
         name: task1
+    - name: echo-hello-world
+      taskRef:
+        name: echo-hello-world    
