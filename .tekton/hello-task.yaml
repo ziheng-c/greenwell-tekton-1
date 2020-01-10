@@ -10,3 +10,7 @@ spec:
         - echo
       args:
         - "hello world for vanilla"
+    - name: enviro-info
+      image: ubuntu
+      command:
+        - printenv    
