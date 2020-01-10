@@ -9,7 +9,13 @@ spec:
       command:
         - echo
       args:
-        - "hello world for vanilla"
+        - "hello world for laughs"
+    -name: echo params
+      image: ubuntu
+      command:
+        - echo
+        - args:
+          - $(params.magic-number)
     - name: enviro-info
       image: ubuntu
       command:
