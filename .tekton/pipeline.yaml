@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1alpha1
 kind: Pipeline
 metadata:
-  name: sample-pipeline
+  name: jerh-pipeline
 spec:
   tasks:
     - name: task1
