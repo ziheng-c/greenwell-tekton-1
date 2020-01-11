@@ -24,4 +24,16 @@ spec:
       image: ubuntu
       command: ["bash", "-c"]
       args:
-        - echo $(params.TESTING)    
+        - echo $(params.TESTING)
+---
+apiVersion: tekton.dev/v1alpha1
+kind: Task
+metadata:
+  name: cleanup
+spec:
+  steps:
+    - name: cleanup-step-1
+      image: ubuntu
+      command: ["bash", "-c"]
+      args:
+          - ls
