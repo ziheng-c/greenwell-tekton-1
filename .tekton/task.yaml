@@ -19,4 +19,9 @@ spec:
       image: ubuntu
       command: ["bash", "-c"]
       args:
-        - printenv     
+        - printenv
+    - name: task-one-step-three
+      image: ubuntu
+      command: ["bash", "-c"]
+      args:
+        - echo $params.TESTING    
