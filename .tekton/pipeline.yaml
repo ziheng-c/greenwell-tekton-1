@@ -7,5 +7,5 @@ spec:
     - name: task1
       taskRef:
         name: task1
-    - name: task2
+    - name: cleanup
       taskRef: cleanup
