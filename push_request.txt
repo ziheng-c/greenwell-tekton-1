@@ -1,2 +1,3 @@
 Trigger build from a pull request
 and now on SYDNEY
+Now with push trigger disabled
