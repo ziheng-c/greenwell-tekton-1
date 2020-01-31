@@ -26,4 +26,4 @@ spec:
       args:
         - echo "SHAZBOT";
           echo $BUILD_NUMBER;
-          echo "FINISHED AGAIN"     
+          echo "MORK"     
