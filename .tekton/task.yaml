@@ -15,8 +15,16 @@ spec:
           then echo "TEST PASS - 200"; exit 0;
           else echo "TEST FAIL - $alive"; exit 1;
           fi
+<<<<<<< HEAD
     - name: task-two
       image: ubuntu
       command: ["bash", "-c"]
       args:
         - echo "SHAZBOT"      
+=======
+    - name: task-one-step-two
+      image: ubuntu
+      command: ["bash", "-c"]
+      args:
+        - printenv     
+>>>>>>> 3e2287848216ffd104876cb1c010955bdaddf5ce
