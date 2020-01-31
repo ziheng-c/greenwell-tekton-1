@@ -26,4 +26,4 @@ spec:
       args:
         - echo "SHAZBOT";
           echo $BUILD_NUMBER;
-          echo "MORK MINDY 2"     
+          echo "MORK MINDY 3"     
