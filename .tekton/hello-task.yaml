@@ -10,7 +10,7 @@ spec:
         - echo
       args:
         - "hello world for laughs"
-    -name: echo params
+    - name: echo params
       image: ubuntu
       command:
         - echo
