@@ -24,4 +24,6 @@ spec:
               fieldPath: metadata.labels['devops.cloud.ibm.com/buildNumber']
       command: ["bash", "-c"]
       args:
-        - echo "SHAZBOT"      
+        - echo "SHAZBOT";
+          echo $BUILD_NUMBER;
+          echo "FINISH"     
