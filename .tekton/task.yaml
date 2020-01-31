@@ -17,6 +17,11 @@ spec:
           fi
     - name: task-two
       image: ubuntu
+      env:
+        - name: BUILD_NUMBER
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.labels['devops.cloud.ibm.com/buildNumber']
       command: ["bash", "-c"]
       args:
         - echo "SHAZBOT"      
