@@ -19,4 +19,4 @@ spec:
       image: ubuntu
       command: ["bash", "-c"]
       args:
-        - echo "SHAZBOT"      
+        - echo "SHAZBOT2"      
