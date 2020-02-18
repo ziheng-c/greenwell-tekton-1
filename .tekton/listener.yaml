@@ -87,3 +87,46 @@ spec:
       params:
         - name: message
           value: Hello from the Manual Triggers EventListener!
+---
+apiVersion: tekton.dev/v1alpha1
+kind: EventListener
+metadata:
+  name: echo-listener
+spec:
+  triggers:
+    - binding:
+        name: echo-pipeline-binding
+      template:
+        name: simple-pipeline-template
+---
+apiVersion: tekton.dev/v1alpha1
+kind: TriggerBinding
+metadata:
+  name: echo-pipeline-binding
+---
+apiVersion: tekton.dev/v1alpha1
+kind: TriggerTemplate
+metadata:
+  name: simple-pipeline-template
+spec:
+  params:
+    - name: quote
+      value: $(params.quote)
+    - name: noquote
+      value: $(params.noquote)
+  resourcetemplates:
+    - apiVersion: tekton.dev/v1alpha1
+      kind: PipelineRun
+      metadata:
+        generateName: echo-pipeline-run-
+        labels:
+          triggertemplated: "true"
+          generatedBy: "echo-example"
+      spec:
+        pipelineRef:
+          name: echo-props-pipeline
+        params:
+          - name: quote
+            value: $(params.quote)
+          - name: noquote
+            value: $(params.noquote)  

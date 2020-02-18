@@ -7,3 +7,23 @@ spec:
     - name: task1
       taskRef:
         name: simple-task
+---
+apiVersion: tekton.dev/v1alpha1
+kind: Pipeline
+metadata:
+  name: echo-props-pipeline
+spec:
+  params:
+    - name: quote
+      description: simple quoted property
+    - name: noquote
+      description: simple unquoted property
+  tasks:
+    - name: echo-task
+      taskRef:
+        name: echo-props
+      params:
+        - name: quote
+          value: $(params.quote)
+        - name: noquote
+          value: $(params.noquote)

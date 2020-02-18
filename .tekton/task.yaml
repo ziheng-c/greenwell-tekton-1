@@ -45,3 +45,28 @@ spec:
       args:
         - echo $BUILD_NUMBER;
           echo "COMPLETED"               
+---
+apiVersion: tekton.dev/v1alpha1
+kind: Task
+metadata:
+  name: echo-props
+spec:
+  input:
+    params:
+      - name: quote
+        description: Simple quoted property
+      - name: noquote
+        description: Simple un-quoted property  
+  steps:
+    - name: show-props
+      image: ubuntu
+      env:
+        - name: QUOTE
+          value: $(inputs.params.quote)
+        - name: NOQUOTE
+          value: $(inputs.params.noquote)
+      command: ["/bin/bash", "-c"]
+      args:
+        - echo "This is what I can see";
+          echo $QUOTE;
+          echo $NOQUOTE
