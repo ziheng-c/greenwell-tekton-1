@@ -21,4 +21,5 @@ spec:
       args:
         - echo "This is what I can see";
           echo $QUOTE;
-          echo $NOQUOTE
+          echo $NOQUOTE;
+          echo "Nothing else to see"
