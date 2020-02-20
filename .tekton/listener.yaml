@@ -21,9 +21,9 @@ metadata:
 spec:
   params:
     - name: quote
-      value: $(params.quote)
+      description: Quoted property
     - name: noquote
-      value: $(params.noquote)
+      description: UnQuoted property
   resourcetemplates:
     - apiVersion: tekton.dev/v1alpha1
       kind: PipelineRun
