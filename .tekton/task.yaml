@@ -3,7 +3,7 @@ kind: Task
 metadata:
   name: echo-props
 spec:
-  input:
+  inputs:
     params:
       - name: quote
         description: Simple quoted property
