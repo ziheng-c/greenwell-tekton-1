@@ -6,10 +6,10 @@ spec:
   params:
     - name: quote
       description: simple quoted property
-      default: "TESTQUOTE"
+      default: TESTQUOTE
     - name: noquote
       description: simple unquoted property
-      default: "TESTNOQUOTE"
+      default: TESTNOQUOTE
   tasks:
     - name: echo-task
       taskRef:
