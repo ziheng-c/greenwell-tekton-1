@@ -1,16 +1,6 @@
 apiVersion: tekton.dev/v1alpha1
 kind: Pipeline
 metadata:
-  name: sample-pipeline
-spec:
-  tasks:
-    - name: task1
-      taskRef:
-        name: simple-task
----
-apiVersion: tekton.dev/v1alpha1
-kind: Pipeline
-metadata:
   name: echo-props-pipeline
 spec:
   params:
