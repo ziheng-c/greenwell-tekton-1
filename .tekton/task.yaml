@@ -21,7 +21,7 @@ spec:
         - name: BUILD_NUMBER
           valueFrom:
             fieldRef:
-              fieldPath: metadata.labels['devops.cloud.ibm.com/buildNumber']
+              fieldPath: metadata.labels['devops.cloud.ibm.com/build-number']
       command: ["bash", "-c"]
       args:
         - echo "SHAZBOT";
