@@ -22,8 +22,13 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.annotations['devops.cloud.ibm.com/build-number']
+        - name: TRIGGER_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.annotations['devops.cloud.ibm.com/trigger-name']     
       command: ["bash", "-c"]
       args:
         - echo "SHAZBOT";
           echo $BUILD_NUMBER;
+          echo $TRIGGER_NAME;
           echo "FINISHED AGAIN"     
