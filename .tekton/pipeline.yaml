@@ -10,6 +10,9 @@ spec:
     - name: noquote
       description: simple unquoted property
       default: TESTNOQUOTE
+    - name: environment_value
+      description: A value from the pipeline level, trigger level or run level
+      default: BLOOPER  
   tasks:
     - name: echo-task
       taskRef:
@@ -19,3 +22,5 @@ spec:
           value: $(params.quote)
         - name: noquote
           value: $(params.noquote)
+        - name: environment_value
+          value: $(params.environment_value)  

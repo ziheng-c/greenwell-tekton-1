@@ -39,4 +39,6 @@ spec:
           - name: quote
             value: $(params.quote)
           - name: noquote
-            value: $(params.noquote)  
+            value: $(params.noquote)
+          - name: environment_value
+            value: $(params.environment_value)  
