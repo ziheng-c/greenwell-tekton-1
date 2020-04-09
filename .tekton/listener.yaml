@@ -20,7 +20,7 @@ metadata:
   name: echo-pipeline-template
 spec:
   params:
-    -name: quote
+    - name: quote
       description: Quoted property
     - name: noquote
       description: UnQuoted property
