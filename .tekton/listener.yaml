@@ -36,7 +36,7 @@ spec:
         pipelineRef:
           name: echo-props-pipeline
         params:
-          - name: quote
+          -name: quote
             value: $(params.quote)
           - name: noquote
             value: $(params.noquote)
