@@ -23,7 +23,7 @@ spec:
           value: $(inputs.params.environment_value)    
       command: ["/bin/bash", "-c"]
       args:
-        - echo "This is what I can see";
+        - echo "This is what I can see man";
           echo $QUOTE;
           echo $NOQUOTE;
           echo "This is what I was sent";
