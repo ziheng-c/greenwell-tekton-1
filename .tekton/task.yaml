@@ -44,11 +44,15 @@ spec:
       image: ubuntu
       env:
         - name: SECURE_VALUE
-          valueFrom: secure-properties
-          key: apikey
+          valueFrom:
+            secretKeyRef:
+              name: secure-properties
+              key: apikey
         - name: ENVIRONMENT
-          valueFrom: environment-properties
-          key: environment
+          valueFrom:
+            configMapKeyRef:
+              name: environment-properties
+              key: environment
         - name: QUOTE
           value: $(inputs.params.quote)    
       command: ["/bin/bash", "-c"]
