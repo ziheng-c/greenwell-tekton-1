@@ -23,12 +23,11 @@ spec:
           value: $(inputs.params.environment_value)    
       command: ["/bin/bash", "-c"]
       args:
-        - echo "This is what I can see man";
+        - echo "The quote value from properties is >>";
           echo $QUOTE;
-          echo $NOQUOTE;
-          echo "This is what I was sent";
+          echo "The environment value from properties is >>";
           echo $ENVIRONMENT_VALUE;
-          echo "Nothing else to see here"
+          echo "FIN"
 ---
 apiVersion: tekton.dev/v1alpha1
 kind: Task
@@ -59,9 +58,9 @@ spec:
       args:
         - echo -e "\033[1mquote\033[0m value is >>";
           echo $QUOTE;
-          echo
+          echo "";
           echo -e "\033[1menvironment\033[0m from ConfigMap is >>";
           echo $ENVIRONMENT;
-          echo
-          echo -e"\033[1mapikey\033[0m from Secrets is >>"
+          echo "";
+          echo -e "\033[1mapikey\033[0m from Secrets is >>";
           echo $SECURE_VALUE
