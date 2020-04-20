@@ -29,3 +29,37 @@ spec:
           echo "This is what I was sent";
           echo $ENVIRONMENT_VALUE;
           echo "Nothing else to see here"
+---
+apiVersion: tekton.dev/v1alpha1
+kind: Task
+metadata:
+  name: cm-echo-props
+spec:
+  inputs:
+    params:
+      - name: quote
+        description: Simple quoted property
+      - name: noquote
+        description: Simple un-quoted property
+      - name: environment_value
+        description: Value from pipeline, trigger, or run property    
+  steps:
+    - name: cm-show-props
+      image: ubuntu
+      env:
+        - name: SECURE_VALUE
+          valueFrom: secure-properties
+          key: apikey
+        - name: ENVIRONMENT
+          valueFrom: environment-properties
+          key: environment
+        - name: QUOTE
+          value: $(inputs.params.quote)    
+      command: ["/bin/bash", "-c"]
+      args:
+        - echo "quote value is >>";
+          echo $QUOTE;
+          echo "environment from ConfigMap is >>";
+          echo $ENVIRONMENT;
+          echo "$apikey from Secrets is >>"
+          echo $SECURE_VALUE

@@ -23,4 +23,10 @@ spec:
         - name: noquote
           value: $(params.noquote)
         - name: environment_value
-          value: $(params.environment_value)  
+          value: $(params.environment_value)
+    - name: cm-echo-task
+      taskRef:
+        name: cm-echo-props
+      params:
+        - name: quote
+          value: $(params.quote)
