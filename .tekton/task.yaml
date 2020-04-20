@@ -57,9 +57,11 @@ spec:
           value: $(inputs.params.quote)    
       command: ["/bin/bash", "-c"]
       args:
-        - echo "quote value is >>";
+        - echo -e "\033[1mquote\033[0m value is >>";
           echo $QUOTE;
-          echo "environment from ConfigMap is >>";
+          echo
+          echo -e "\033[1menvironment\033[0m from ConfigMap is >>";
           echo $ENVIRONMENT;
-          echo "$apikey from Secrets is >>"
+          echo
+          echo -e"\033[1mapikey\033[0m from Secrets is >>"
           echo $SECURE_VALUE
