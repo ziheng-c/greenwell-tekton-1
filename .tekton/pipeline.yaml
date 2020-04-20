@@ -30,3 +30,5 @@ spec:
       params:
         - name: quote
           value: $(params.quote)
+    - name: env-echo-task
+      taskRef: cm-all-props
