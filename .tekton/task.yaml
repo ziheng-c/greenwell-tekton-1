@@ -20,14 +20,14 @@ spec:
         - name: NOQUOTE
           value: $(inputs.params.noquote)
         - name: ENVIRONMENT_VALUE
-          value: $(inputs.params.environment_value)    
+          value: $(inputs.params.environment)    
       command: ["/bin/bash", "-c"]
       args:
-        - echo "The quote value from properties is >>";
+        - echo -e "The \033[36mquote\033[0m value from properties is >>";
           echo $QUOTE;
-          echo "The environment value from properties is >>";
-          echo $ENVIRONMENT_VALUE;
-          echo "FIN"
+          echo "";
+          echo -e "The \033[36menvironment\033[0m value from properties is >>";
+          echo $ENVIRONMENT_VALUE
 ---
 apiVersion: tekton.dev/v1alpha1
 kind: Task
@@ -78,5 +78,8 @@ spec:
               name: environment-properties 
       command: ["/bin/bash", "-c"]
       args:
-        - echo -e "The environment for this Step is ";
-          env
+        - echo -e "The \033[36menvironment\033[0m for this Step is ";
+          env;
+          echo "";
+          echo "One sample property from this environment is >>";
+          echo "$quote"
