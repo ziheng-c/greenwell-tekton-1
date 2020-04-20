@@ -38,11 +38,7 @@ spec:
   inputs:
     params:
       - name: quote
-        description: Simple quoted property
-      - name: noquote
-        description: Simple un-quoted property
-      - name: environment_value
-        description: Value from pipeline, trigger, or run property    
+        description: Simple quoted property  
   steps:
     - name: cm-show-props
       image: ubuntu
