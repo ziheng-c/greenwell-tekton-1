@@ -20,7 +20,7 @@ spec:
         - name: NOQUOTE
           value: $(inputs.params.noquote)
         - name: ENVIRONMENT_VALUE
-          value: $(inputs.params.environment)    
+          value: $(inputs.params.environment_value)    
       command: ["/bin/bash", "-c"]
       args:
         - echo -e "The \033[36mquote\033[0m value from properties is >>";
@@ -79,4 +79,7 @@ spec:
       command: ["/bin/bash", "-c"]
       args:
         - echo -e "The \033[36menvironment\033[0m for this Step is ";
-          env
+          env;
+          echo "";
+          echo "One sample property from this environment is >>";
+          echo "$quote"

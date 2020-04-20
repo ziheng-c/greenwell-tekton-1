@@ -41,4 +41,4 @@ spec:
           - name: noquote
             value: $(params.noquote)
           - name: environment_value
-            value: $(params.environment_value)  
+            value: $(params.environment)  
