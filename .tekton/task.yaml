@@ -115,4 +115,4 @@ spec:
             name: environment-properties     
       command: ["/bin/bash", "-c"]
       args:
-        - curl https://devops-api.us-south.devops.dev.cloud.ibm.com/v1/tekton-webhook/b9dd6e81-f195-40ab-b308-502b15ea88a6/run/29da21ff-6d4e-4e1d-9bac-b5db4eed4cbb
+        - wget -qO- https://devops-api.us-south.devops.dev.cloud.ibm.com/v1/tekton-webhook/b9dd6e81-f195-40ab-b308-502b15ea88a6/run/29da21ff-6d4e-4e1d-9bac-b5db4eed4cbb --post-data="" | jq '.'
