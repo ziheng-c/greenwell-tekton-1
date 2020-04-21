@@ -33,6 +33,9 @@ spec:
     - name: env-echo-task
       taskRef: 
         name: cm-all-props
+    - name: cm-secrets-all-props
+        taskRef:
+          name: cm-secrets-props    
     - name: call-external-pipeline
       taskRef:
         name: call-the-pipe-cleaner    
