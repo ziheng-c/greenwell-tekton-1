@@ -34,7 +34,7 @@ spec:
       taskRef: 
         name: cm-all-props
     - name: cm-secrets-all-props
-        taskRef:
+      taskRef:
           name: cm-secrets-props    
     - name: call-external-pipeline
       taskRef:
