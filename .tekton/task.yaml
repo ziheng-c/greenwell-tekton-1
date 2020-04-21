@@ -95,7 +95,7 @@ spec:
       envFrom:
         - configMapRef:
             name: environment-properties
-        - configMapRef:
+        - secretRef:
             name: secure-properties     
       command: ["/bin/bash", "-c"]
       args:
