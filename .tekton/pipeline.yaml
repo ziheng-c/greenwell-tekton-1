@@ -27,9 +27,6 @@ spec:
     - name: cm-echo-task
       taskRef:
         name: cm-echo-props
-      params:
-        - name: quote
-          value: $(params.quote)
     - name: env-echo-task
       taskRef: 
         name: cm-all-props
