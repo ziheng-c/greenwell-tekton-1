@@ -1,16 +1,15 @@
-apiVersion: tekton.dev/v1alpha1
+apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
   name: echo-props
 spec:
-  inputs:
-    params:
-      - name: quote
-        description: Simple quoted property
-      - name: noquote
-        description: Simple un-quoted property
-      - name: environment_value
-        description: Value from pipeline, trigger, or run property    
+  params:
+    - name: quote
+      description: Simple quoted property
+    - name: noquote
+      description: Simple un-quoted property
+    - name: environment_value
+      description: Value from pipeline, trigger, or run property    
   steps:
     - name: show-props
       image: ubuntu
@@ -20,7 +19,7 @@ spec:
         - name: NOQUOTE
           value: $(inputs.params.noquote)
         - name: ENVIRONMENT_VALUE
-          value: $(inputs.params.environment_value)    
+          value: $(params.environment_value)    
       command: ["/bin/bash", "-c"]
       args:
         - echo -e "The \033[36mquote\033[0m value from properties is >>";
@@ -29,15 +28,14 @@ spec:
           echo -e "The \033[36menvironment\033[0m value from properties is >>";
           echo $ENVIRONMENT_VALUE
 ---
-apiVersion: tekton.dev/v1alpha1
+apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
   name: cm-echo-props
 spec:
-  inputs:
-    params:
-      - name: quote
-        description: Simple quoted property  
+  params:
+    - name: quote
+      description: Simple quoted property  
   steps:
     - name: cm-show-props
       image: ubuntu
@@ -53,7 +51,7 @@ spec:
               name: environment-properties
               key: environment
         - name: QUOTE
-          value: $(inputs.params.quote)    
+          value: $(params.quote)    
       command: ["/bin/bash", "-c"]
       args:
         - echo -e "\033[36mquote\033[0m value is >>";
@@ -65,7 +63,7 @@ spec:
           echo -e "\033[36mapikey\033[0m from Secrets is >>";
           echo $SECURE_VALUE
 ---
-apiVersion: tekton.dev/v1alpha1
+apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
   name: cm-all-props
@@ -84,7 +82,7 @@ spec:
           echo "One sample property from this environment is >>";
           echo "$quote"
 ---
-apiVersion: tekton.dev/v1alpha1
+apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
   name: cm-secrets-props
@@ -102,7 +100,7 @@ spec:
         - echo -e "The \033[36menvironment\033[0m for this Step is ";
           env
 ---
-apiVersion: tekton.dev/v1alpha1
+apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
   name: call-the-pipe-cleaner
