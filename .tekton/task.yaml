@@ -33,9 +33,6 @@ kind: Task
 metadata:
   name: cm-echo-props
 spec:
-  params:
-    - name: quote
-      description: Simple quoted property  
   steps:
     - name: cm-show-props
       image: ubuntu
@@ -49,15 +46,10 @@ spec:
           valueFrom:
             configMapKeyRef:
               name: environment-properties
-              key: environment
-        - name: QUOTE
-          value: $(params.quote)    
+              key: environment  
       command: ["/bin/bash", "-c"]
       args:
-        - echo -e "\033[36mquote\033[0m value is >>";
-          echo $QUOTE;
-          echo "";
-          echo -e "\033[36menvironment\033[0m from ConfigMap is >>";
+        - echo -e "\033[36menvironment\033[0m from ConfigMap is >>";
           echo $ENVIRONMENT;
           echo "";
           echo -e "\033[36mapikey\033[0m from Secrets is >>";
