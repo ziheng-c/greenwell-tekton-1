@@ -14,6 +14,9 @@ spec:
       description: A value from the pipeline level, trigger level or run level
       default: BLOOPER  
   tasks:
+    - name: show-build-number
+      taskRef:
+        name: simple-task
     - name: echo-task
       taskRef:
         name: echo-props
