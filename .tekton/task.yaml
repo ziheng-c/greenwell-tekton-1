@@ -71,7 +71,10 @@ spec:
           echo $ENVIRONMENT;
           echo "";
           echo -e "\033[36mapikey\033[0m from Secrets is >>";
-          echo $SECURE_VALUE
+          echo $SECURE_VALUE;
+          test = `echo ${SECURE_VALUE}`;
+          echo ${test}
+
 ---
 apiVersion: tekton.dev/v1beta1
 kind: Task
