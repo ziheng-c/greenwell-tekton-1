@@ -72,7 +72,7 @@ spec:
           echo "";
           echo -e "\033[36mapikey\033[0m from Secrets is >>";
           echo $SECURE_VALUE;
-          test = `echo ${SECURE_VALUE}`;
+          test=`echo ${SECURE_VALUE}`;
           echo ${test}
 
 ---
