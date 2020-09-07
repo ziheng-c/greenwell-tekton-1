@@ -116,6 +116,22 @@ spec:
 apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
+  name: cm-toolchain-props
+spec:
+  steps:
+    - name: cm-show-toolchain-env
+      image: ubuntu
+      envFrom:
+        - configMapRef:
+            name: toolchain-properties  
+      command: ["/bin/bash", "-c"]
+      args:
+        - echo -e "The \033[36menvironment\033[0m for this Step is ";
+          env
+---
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
   name: call-the-pipe-cleaner
 spec:
   steps:
