@@ -123,7 +123,7 @@ spec:
       image: ubuntu
       envFrom:
         - configMapRef:
-            name: toolchain-properties  
+            name: toolchain  
       command: ["/bin/bash", "-c"]
       args:
         - echo -e "The \033[36menvironment\033[0m for this Step is ";
