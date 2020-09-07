@@ -35,4 +35,7 @@ spec:
         name: cm-all-props
     - name: cm-secrets-all-props
       taskRef:
-          name: cm-secrets-props       
+        name: cm-secrets-props
+    - name: cm-toolchain-props
+      taskRef:
+        name: cm-toolchain-props
