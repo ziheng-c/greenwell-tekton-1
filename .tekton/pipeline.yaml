@@ -19,7 +19,7 @@ spec:
         name: simple-task
     - name: show-info
       taskRef:
-        name: show-postgres
+        name: postgres-test
       params:
         name: pg-user
         value: $(params.pguser)      
