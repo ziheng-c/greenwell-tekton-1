@@ -21,8 +21,8 @@ spec:
       taskRef:
         name: postgres-test
       params:
-        name: pguser
-        value: $(params.pguser)      
+        name: pg_user
+        value: $(params.pg_user)      #This is from the listener template
     - name: echo-task
       taskRef:
         name: echo-props

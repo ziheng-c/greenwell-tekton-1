@@ -151,14 +151,15 @@ metadata:
   name: postgres-test
 spec:
   params:
-    - name: pguser
+    - name: pg_user   #This is from the pipeline definition
       description: Postgres User    
+      default: admin
   steps:
     - name: show-info
       image: alpine
       env:
         - name: PG_USER
-          value: $(params.pguser)    
+          value: $(params.pg_user)    
       command: ["/bin/bash", "-c"]
       args:
         - echo -e "The \033[36mPostgres User\033[0m value from properties is >>";
