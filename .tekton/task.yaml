@@ -151,14 +151,14 @@ metadata:
   name: postgres-test
 spec:
   params:
-    - name: pg-user
+    - name: pguser
       description: Postgres User    
   steps:
     - name: show-info
       image: alpine
       env:
         - name: PG_USER
-          value: $(params.pg-user)    
+          value: $(params.pguser)    
       command: ["/bin/bash", "-c"]
       args:
         - echo -e "The \033[36mPostgres User\033[0m value from properties is >>";

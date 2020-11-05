@@ -21,7 +21,7 @@ spec:
       taskRef:
         name: postgres-test
       params:
-        name: pg-user
+        name: pguser
         value: $(params.pguser)      
     - name: echo-task
       taskRef:
