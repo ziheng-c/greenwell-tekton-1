@@ -144,3 +144,22 @@ spec:
       args:
         - apt-get install -y wget;
           wget -qO- https://devops-api.us-south.devops.dev.cloud.ibm.com/v1/tekton-webhook/b9dd6e81-f195-40ab-b308-502b15ea88a6/run/29da21ff-6d4e-4e1d-9bac-b5db4eed4cbb --post-data="" | jq '.'
+---
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: postgres-test
+spec:
+  params:
+    - name: pg-user
+      description: Postgres User    
+  steps:
+    - name: show-info
+      image: alpine
+      env:
+        - name: PG_USER
+          value: $(params.pg-user)    
+      command: ["/bin/bash", "-c"]
+      args:
+        - echo -e "The \033[36mPostgres User\033[0m value from properties is >>";
+          echo $PG_USER

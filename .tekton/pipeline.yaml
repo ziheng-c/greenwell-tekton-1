@@ -17,6 +17,12 @@ spec:
     - name: show-build-number
       taskRef:
         name: simple-task
+    - name: show-info
+      taskRef:
+        name: show-postgres
+      params:
+        name: pg-user
+        value: $(params.pguser)      
     - name: echo-task
       taskRef:
         name: echo-props
