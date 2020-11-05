@@ -12,7 +12,10 @@ spec:
       default: TESTNOQUOTE
     - name: environment_value
       description: A value from the pipeline level, trigger level or run level
-      default: BLOOPER  
+      default: BLOOPER
+    - name: pg_user
+      description: Postgres login User
+      default: ADMIN  
   tasks:
     - name: show-build-number
       taskRef:
