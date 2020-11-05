@@ -17,7 +17,7 @@ spec:
     - name: show-build-number
       taskRef:
         name: simple-task
-    - name: show-info
+    - name: postgres-test
       taskRef:
         name: postgres-test
       params:

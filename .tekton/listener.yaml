@@ -41,6 +41,6 @@ spec:
           - name: noquote
             value: $(params.noquote)
           - name: environment_value
-            value: $(params.environment) #this is from CD enironment properties
+            value: $(params.environment) #this is from CD environment properties
           - name: pg_user
-            value: $(params.pguser)  
+            value: $(params.pguser99)  
