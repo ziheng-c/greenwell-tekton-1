@@ -24,6 +24,8 @@ spec:
       description: Quoted property
     - name: noquote
       description: UnQuoted property
+    - name: pg_user
+      description: Postgres login  
   resourcetemplates:
     - apiVersion: tekton.dev/v1beta1
       kind: PipelineRun
