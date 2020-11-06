@@ -45,4 +45,5 @@ spec:
           - name: environment_value
             value: $(params.environment) #this is from CD environment properties
           - name: pg_user
-            value: $(params.pg_user)  
+            value: $(params.pg_user)
+

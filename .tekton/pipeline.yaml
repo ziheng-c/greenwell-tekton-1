@@ -15,7 +15,7 @@ spec:
       default: BLOOPER
     - name: pg_user
       description: Postgres login User
-      default: ADMIN  
+      default: ADMIN
   tasks:
     - name: show-build-number
       taskRef:
@@ -24,8 +24,8 @@ spec:
       taskRef:
         name: postgres-test
       params:
-        name: pg_user
-        value: $(params.pg_user)      #This is from the listener template
+        - name: pg_user
+          value: $(params.pg_user) 
     - name: echo-task
       taskRef:
         name: echo-props
