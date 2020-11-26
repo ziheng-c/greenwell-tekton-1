@@ -1,24 +1,24 @@
-- apiVersion: tekton.dev/v1beta1
-  kind: Task
-  metadata:
-    name: fetch-environment
-  spec:
-    params:
-      - name: target-environment
-        description: the target environment
-        default: nothing
-    steps:
-      - name: echo-some-stuff
-        image: 'ibmcom/pipeline-base-image:latest'
-        env:
-          - name: ENVIRONMENT
-            value: $(params.target-environment)
-        command:
-          - /bin/bash
-          - '-c'
-        args:
-          - |
-            #!/bin/bash
-            echo "******"
-            echo $ENVIRONMENT
-            echo "******"
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: fetch-environment
+spec:
+  params:
+    - name: target-environment
+      description: the target environment
+      default: nothing
+  steps:
+    - name: echo-some-stuff
+      image: 'ibmcom/pipeline-base-image:latest'
+      env:
+        - name: ENVIRONMENT
+          value: $(params.target-environment)
+      command:
+        - /bin/bash
+        - '-c'
+      args:
+        - |
+          #!/bin/bash
+          echo "******"
+          echo $ENVIRONMENT
+          echo "******"

@@ -1,36 +1,38 @@
-- apiVersion: tekton.dev/v1beta1
-  kind: TriggerTemplate
-  metadata:
-    name: simple-hosted-pipeline
-  spec:
-    params:
-      - name: target-environment
-    resourcetemplates:
-      - apiVersion: tekton.dev/v1beta1
-        kind: PipelineRun
-        metadata:
-          name: simple-hosted-pipeline-$(uid)
-        spec:
-          pipelineRef:
-            name: simple-hosted-pipeline
-          params:
-            - name: target-environment
-              value: $(params.target-environment)
-- apiVersion: tekton.dev/v1beta1
-  kind: TriggerBinding
-  metadata:
-    name: manual-run
-  spec:
-    params:
-      - name: foo
-        value: nothing
-- apiVersion: tekton.dev/v1beta1
-  kind: EventListener
-  metadata:
-    name: manual-run
-  spec:
-    triggers:
-      - binding:
-          name: manual-run
-        template:
+apiVersion: tekton.dev/v1beta1
+kind: TriggerTemplate
+metadata:
+  name: simple-hosted-pipeline
+spec:
+  params:
+    - name: target-environment
+  resourcetemplates:
+    - apiVersion: tekton.dev/v1beta1
+      kind: PipelineRun
+      metadata:
+        name: simple-hosted-pipeline-$(uid)
+      spec:
+        pipelineRef:
           name: simple-hosted-pipeline
+        params:
+          - name: target-environment
+            value: $(params.target-environment)
+---
+apiVersion: tekton.dev/v1beta1
+kind: TriggerBinding
+metadata:
+  name: manual-run
+spec:
+  params:
+    - name: foo
+      value: nothing
+---
+apiVersion: tekton.dev/v1beta1
+kind: EventListener
+metadata:
+  name: manual-run
+spec:
+  triggers:
+    - binding:
+        name: manual-run
+      template:
+        name: simple-hosted-pipeline
