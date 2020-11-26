@@ -1,41 +1,15 @@
-apiVersion: tekton.dev/v1beta1
-kind: Pipeline
-metadata:
-  name: echo-props-pipeline
-spec:
-  params:
-    - name: quote
-      description: simple quoted property
-      default: TESTQUOTE
-    - name: noquote
-      description: simple unquoted property
-      default: TESTNOQUOTE
-    - name: environment_value
-      description: A value from the pipeline level, trigger level or run level
-      default: BLOOPER  
-  tasks:
-    - name: show-build-number
-      taskRef:
-        name: simple-task
-    - name: echo-task
-      taskRef:
-        name: echo-props
-      params:
-        - name: quote
-          value: $(params.quote)
-        - name: noquote
-          value: $(params.noquote)
-        - name: environment_value
-          value: $(params.environment_value)
-    - name: cm-echo-task
-      taskRef:
-        name: cm-echo-props
-    - name: env-echo-task
-      taskRef: 
-        name: cm-all-props
-    - name: cm-secrets-all-props
-      taskRef:
-        name: cm-secrets-props
-    - name: cm-toolchain-props
-      taskRef:
-        name: cm-toolchain-props
+- apiVersion: tekton.dev/v1beta1
+  kind: Pipeline
+  metadata:
+    name: simple-hosted-pipeline
+  spec:
+    params:
+      - name: target-environment
+        description: the environment to deploy to
+    tasks:
+      - name: environment-test
+        taskRef:
+          name: fetch-environment
+        params:
+          - name: target-environment
+            value: $(params.target-environment)

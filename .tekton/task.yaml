@@ -1,146 +1,24 @@
-apiVersion: tekton.dev/v1beta1
-kind: Task
-metadata:
-  name: simple-task
-spec:
-  steps:
-    - name: simple-step
-      image: ibmcom/pipeline-base-image:latest
-      env:
-        - name: BUILD_NUMBER
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.annotations['devops.cloud.ibm.com/build-number']
-      command: ["bash", "-c"]
-      args:
-        - echo $BUILD_NUMBER;
-          echo "COMPLETED"       
----
-apiVersion: tekton.dev/v1beta1
-kind: Task
-metadata:
-  name: echo-props
-spec:
-  params:
-    - name: quote
-      description: Simple quoted property
-    - name: noquote
-      description: Simple un-quoted property
-    - name: environment_value
-      description: Value from pipeline, trigger, or run property    
-  steps:
-    - name: show-props
-      image: ubuntu
-      env:
-        - name: QUOTE
-          value: $(inputs.params.quote)
-        - name: NOQUOTE
-          value: $(inputs.params.noquote)
-        - name: ENVIRONMENT_VALUE
-          value: $(params.environment_value)    
-      command: ["/bin/bash", "-c"]
-      args:
-        - echo -e "The \033[36mquote\033[0m value from properties is >>";
-          echo $QUOTE;
-          echo "";
-          echo -e "The \033[36menvironment\033[0m value from properties is >>";
-          echo $ENVIRONMENT_VALUE
----
-apiVersion: tekton.dev/v1beta1
-kind: Task
-metadata:
-  name: cm-echo-props
-spec:
-  steps:
-    - name: cm-show-props
-      image: ubuntu
-      env:
-        - name: SECURE_VALUE
-          valueFrom:
-            secretKeyRef:
-              name: secure-properties
-              key: apikey
-        - name: ENVIRONMENT
-          valueFrom:
-            configMapKeyRef:
-              name: environment-properties
-              key: environment  
-      command: ["/bin/bash", "-c"]
-      args:
-        - echo -e "\033[36menvironment\033[0m from ConfigMap is >>";
-          echo $ENVIRONMENT;
-          echo "";
-          echo -e "\033[36mapikey\033[0m from Secrets is >>";
-          echo $SECURE_VALUE;
-          test=`echo ${SECURE_VALUE}`;
-          echo ${test}
-
----
-apiVersion: tekton.dev/v1beta1
-kind: Task
-metadata:
-  name: cm-all-props
-spec:
-  steps:
-    - name: cm-show-environment
-      image: ubuntu
-      envFrom:
-        - configMapRef:
-              name: environment-properties 
-      command: ["/bin/bash", "-c"]
-      args:
-        - echo -e "The \033[36menvironment\033[0m for this Step is ";
-          env;
-          echo "";
-          echo "One sample property from this environment is >>";
-          echo "$quote"
----
-apiVersion: tekton.dev/v1beta1
-kind: Task
-metadata:
-  name: cm-secrets-props
-spec:
-  steps:
-    - name: cm-show-full-env
-      image: ubuntu
-      envFrom:
-        - configMapRef:
-            name: environment-properties
-        - secretRef:
-            name: secure-properties     
-      command: ["/bin/bash", "-c"]
-      args:
-        - echo -e "The \033[36menvironment\033[0m for this Step is ";
-          env
----
-apiVersion: tekton.dev/v1beta1
-kind: Task
-metadata:
-  name: cm-toolchain-props
-spec:
-  steps:
-    - name: cm-show-toolchain-env
-      image: ubuntu
-      envFrom:
-        - configMapRef:
-            name: toolchain  
-      command: ["/bin/bash", "-c"]
-      args:
-        - echo -e "The \033[36menvironment\033[0m for this Step is ";
-          env
----
-apiVersion: tekton.dev/v1beta1
-kind: Task
-metadata:
-  name: call-the-pipe-cleaner
-spec:
-  steps:
-    - name: call-another-pipeline
-      image: ubuntu
-      envFrom:
-        - configMapRef:
-            name: environment-properties     
-      command: ["/bin/bash", "-c"]
-      args:
-        - apt-get install -y wget;
-          wget -qO- https://devops-api.us-south.devops.dev.cloud.ibm.com/v1/tekton-webhook/b9dd6e81-f195-40ab-b308-502b15ea88a6/run/29da21ff-6d4e-4e1d-9bac-b5db4eed4cbb --post-data="" | jq '.'
+- apiVersion: tekton.dev/v1beta1
+  kind: Task
+  metadata:
+    name: fetch-environment
+  spec:
+    params:
+      - name: target-environment
+        description: the target environment
+        default: nothing
+    steps:
+      - name: echo-some-stuff
+        image: 'ibmcom/pipeline-base-image:latest'
+        env:
+          - name: ENVIRONMENT
+            value: $(params.target-environment)
+        command:
+          - /bin/bash
+          - '-c'
+        args:
+          - |
+            #!/bin/bash
+            echo "******"
+            echo $ENVIRONMENT
+            echo "******"

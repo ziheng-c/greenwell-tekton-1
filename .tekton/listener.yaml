@@ -1,44 +1,36 @@
-apiVersion: tekton.dev/v1beta1
-kind: EventListener
-metadata:
-  name: echo-listener
-spec:
-  triggers:
-    - binding:
-        name: echo-pipeline-binding
-      template:
-        name: echo-pipeline-template
----
-apiVersion: tekton.dev/v1beta1
-kind: TriggerBinding
-metadata:
-  name: echo-pipeline-binding
----
-apiVersion: tekton.dev/v1beta1
-kind: TriggerTemplate
-metadata:
-  name: echo-pipeline-template
-spec:
-  params:
-    - name: quote
-      description: Quoted property
-    - name: noquote
-      description: UnQuoted property
-  resourcetemplates:
-    - apiVersion: tekton.dev/v1beta1
-      kind: PipelineRun
-      metadata:
-        generateName: echo-pipeline-run-
-        labels:
-          triggertemplated: "true"
-          generatedBy: "echo-example"
-      spec:
-        pipelineRef:
-          name: echo-props-pipeline
-        params:
-          - name: quote
-            value: $(params.quote)
-          - name: noquote
-            value: $(params.noquote)
-          - name: environment_value
-            value: $(params.environment)  
+- apiVersion: tekton.dev/v1beta1
+  kind: TriggerTemplate
+  metadata:
+    name: simple-hosted-pipeline
+  spec:
+    params:
+      - name: target-environment
+    resourcetemplates:
+      - apiVersion: tekton.dev/v1beta1
+        kind: PipelineRun
+        metadata:
+          name: simple-hosted-pipeline-$(uid)
+        spec:
+          pipelineRef:
+            name: simple-hosted-pipeline
+          params:
+            - name: target-environment
+              value: $(params.target-environment)
+- apiVersion: tekton.dev/v1beta1
+  kind: TriggerBinding
+  metadata:
+    name: manual-run
+  spec:
+    params:
+      - name: foo
+        value: nothing
+- apiVersion: tekton.dev/v1beta1
+  kind: EventListener
+  metadata:
+    name: manual-run
+  spec:
+    triggers:
+      - binding:
+          name: manual-run
+        template:
+          name: simple-hosted-pipeline
